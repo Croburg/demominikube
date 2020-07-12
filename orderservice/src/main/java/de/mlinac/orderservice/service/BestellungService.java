@@ -1,6 +1,5 @@
 package de.mlinac.orderservice.service;
 
-import com.netflix.discovery.converters.Auto;
 import de.mlinac.orderservice.domain.Artikel;
 import de.mlinac.orderservice.domain.Artikelwahl;
 import de.mlinac.orderservice.domain.Bestellung;

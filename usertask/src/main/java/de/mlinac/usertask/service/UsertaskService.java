@@ -1,6 +1,5 @@
 package de.mlinac.usertask.service;
 
-import com.netflix.discovery.converters.Auto;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.repository.DeploymentBuilder;

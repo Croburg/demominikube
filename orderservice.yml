@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: orderservice
+  name: orderservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: orderservice
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: orderservice
+    spec:
+      containers:
+        - image: mmlinac/kube-orderservice
+          name: orderservice
+          ports:
+            - containerPort: 8082
+          resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: orderservice
+  name: orderservice
+spec:
+  ports:
+    - port: 8082
+      protocol: TCP
+      targetPort: 8082
+  selector:
+    run: orderservice
+  type: LoadBalancer
+status:
+  loadBalancer: {}

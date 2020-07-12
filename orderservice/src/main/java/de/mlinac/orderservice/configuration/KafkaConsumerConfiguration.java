@@ -3,6 +3,7 @@ package de.mlinac.orderservice.configuration;
 import de.mlinac.orderservice.domain.Bestellung;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,12 +24,17 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfiguration {
 
+    //https://github.com/achalise/reactive-microservices
+    @Value(value = "${kafka.bootstrapAddress}")
+    private String bootstrapAddress;
+
+
     //Zahlung
     @ConditionalOnMissingBean(ConsumerFactory.class)
     public ConsumerFactory<String, Bestellung> bestellungConsumerFactory(){
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "bestellung-service");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
@@ -55,7 +61,7 @@ public class KafkaConsumerConfiguration {
     public ConsumerFactory<String, String > statusConsumerFactory(){
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "bestellung-service");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -80,7 +86,7 @@ public class KafkaConsumerConfiguration {
     public ConsumerFactory<String, Map<String, Object>> mapConsumerFactory(){
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "usertask-service");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);

@@ -1,6 +1,6 @@
 package de.mlinac.bonuspunkte.controller;
 
-import com.netflix.discovery.converters.Auto;
+
 import de.mlinac.bonuspunkte.model.PunkteKonto;
 import de.mlinac.bonuspunkte.service.PunkteService;
 import org.springframework.beans.factory.annotation.Autowired;

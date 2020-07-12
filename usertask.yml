@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: usertask
+  name: usertask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: usertask
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: usertask
+    spec:
+      containers:
+        - image: mmlinac/kube-usertask
+          name: usertask
+          ports:
+            - containerPort: 8081
+          resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: usertask
+  name: usertask
+spec:
+  ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    run: usertask
+  type: LoadBalancer
+status:
+  loadBalancer: {}

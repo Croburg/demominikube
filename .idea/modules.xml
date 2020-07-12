@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/bonuspunkte-service/bonuspunkte-service.iml" filepath="$PROJECT_DIR$/bonuspunkte-service/bonuspunkte-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/checkout-service/checkout-service.iml" filepath="$PROJECT_DIR$/checkout-service/checkout-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/kubernetes.iml" filepath="$PROJECT_DIR$/.idea/kubernetes.iml" />
       <module fileurl="file://$PROJECT_DIR$/orderservice/orderservice.iml" filepath="$PROJECT_DIR$/orderservice/orderservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/usertask/usertask.iml" filepath="$PROJECT_DIR$/usertask/usertask.iml" />
       <module fileurl="file://$PROJECT_DIR$/versand-service/versand-service.iml" filepath="$PROJECT_DIR$/versand-service/versand-service.iml" />

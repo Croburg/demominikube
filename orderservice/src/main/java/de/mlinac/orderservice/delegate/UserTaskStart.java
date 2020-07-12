@@ -1,6 +1,6 @@
 package de.mlinac.orderservice.delegate;
 
-import com.netflix.discovery.converters.Auto;
+
 import de.mlinac.orderservice.domain.Bestellung;
 import de.mlinac.orderservice.message.MessageSender;
 import de.mlinac.orderservice.service.BestellungService;

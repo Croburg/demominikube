@@ -5,6 +5,7 @@ import de.mlinac.bonuspunkte.model.Bestellung;
 import de.mlinac.bonuspunkte.model.PunkteKonto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,12 +24,14 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfiguration {
 
+    @Value(value = "${kafka.bootstrapAddress}")
+    private String bootstrapAddress;
 
     @ConditionalOnMissingBean(ConsumerFactory.class)
     public ConsumerFactory<String, Bestellung> bestellungConsumerFactory(){
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "bonuspunkte-service");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
