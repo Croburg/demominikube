@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="benachrichtigung-service" />
+        <module name="eureka-server" />
+        <module name="bonuspunkte-service" />
+        <module name="checkout-service" />
+        <module name="versand-service" />
+        <module name="usertask" />
+        <module name="zahlung-service" />
+        <module name="orderservice" />
+        <module name="zuul-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apache" target="1.5" />
+      <module name="bachelorarbeit" target="1.8" />
+      <module name="benachrichtigung-service" target="1.8" />
+      <module name="bonuspunkte-service" target="1.8" />
+      <module name="chechout-service" target="1.8" />
+      <module name="checkout" target="1.8" />
+      <module name="checkout-service" target="1.8" />
+      <module name="demo" target="1.8" />
+      <module name="eureka-server" target="1.8" />
+      <module name="kafka" target="1.5" />
+      <module name="kunde-service" target="1.8" />
+      <module name="lager-service" target="1.8" />
+      <module name="orderservice" target="1.8" />
+      <module name="usertask" target="1.8" />
+      <module name="versand-service" target="1.8" />
+      <module name="zahlung-service" target="1.8" />
+      <module name="zuul-service" target="1.8" />
+      <module name="zuul-service (1)" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="benachrichtigung-service" options="-parameters" />
+      <module name="bonuspunkte-service" options="-parameters" />
+      <module name="chechout-service" options="-parameters" />
+      <module name="checkout" options="-parameters" />
+      <module name="checkout-service" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="kunde-service" options="-parameters" />
+      <module name="lager-service" options="-parameters" />
+      <module name="orderservice" options="-parameters" />
+      <module name="usertask" options="-parameters" />
+      <module name="versand-service" options="-parameters" />
+      <module name="zahlung-service" options="-parameters" />
+      <module name="zuul-service" options="-parameters" />
+      <module name="zuul-service (1)" options="-parameters" />
+    </option>
+  </component>
+</project>

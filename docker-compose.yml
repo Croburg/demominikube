@@ -1,0 +1,85 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+  kafka:
+    image: wurstmeister/kafka:2.12-2.3.1
+    links:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS:
+        "checkout1:3:1\
+         checkout2:3:1\
+         checkout3:3:1\
+         zahlung-durchfuehren:3:1\
+         zahlung-gutschreiben:3:1\
+         ware-verschicken:3:1\
+         versand-stornieren:3:1\
+         bonuspunkte-gutschreiben:3:1\
+         bonuspunkte-abziehen:3:1\
+         zahlung-erhalten:3:1\
+         zahlung-fehlgeschlagen:3:1\
+         usertask:3:1\
+         bestellungUserTask:3:1"
+  zuul:
+    build: zuul-service/
+    links:
+      - eureka
+    ports:
+      - "8080:8080"
+  eureka:
+    build: eureka-server/
+    ports:
+      - "8761:8761"
+  checkout-service:
+    build: checkout-service/
+    links:
+      - eureka
+      - kafka
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  orderservice:
+    build: orderservice/
+    links:
+      - eureka
+      - kafka
+    ports:
+     - "8081:8081"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  bonuspunkte-service:
+    build: bonuspunkte-service/
+    links:
+      - eureka
+      - kafka
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  versand-service:
+    build: versand-service/
+    links:
+      - eureka
+      - kafka
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  zahlung-service:
+    build: zahlung-service/
+    links:
+      - eureka
+      - kafka
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  usertask:
+    build: usertask/
+    links:
+      - eureka
+      - kafka
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/benachrichtigung-service/benachrichtigung-service.iml" filepath="$PROJECT_DIR$/benachrichtigung-service/benachrichtigung-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bonuspunkte-service/bonuspunkte-service.iml" filepath="$PROJECT_DIR$/bonuspunkte-service/bonuspunkte-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkout-service/checkout-service.iml" filepath="$PROJECT_DIR$/checkout-service/checkout-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/orderservice/orderservice.iml" filepath="$PROJECT_DIR$/orderservice/orderservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/usertask/usertask.iml" filepath="$PROJECT_DIR$/usertask/usertask.iml" />
+      <module fileurl="file://$PROJECT_DIR$/versand-service/versand-service.iml" filepath="$PROJECT_DIR$/versand-service/versand-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zahlung-service/zahlung-service.iml" filepath="$PROJECT_DIR$/zahlung-service/zahlung-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zuul-service/zuul-service.iml" filepath="$PROJECT_DIR$/zuul-service/zuul-service.iml" />
+    </modules>
+  </component>
+</project>

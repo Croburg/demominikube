@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1dxoqfl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+  <bpmn:process id="bestellprozess_1" isExecutable="true" camunda:versionTag="2">
+    <bpmn:serviceTask id="bonuspunkteTask" name="Bonuspunkte gutschreiben" camunda:delegateExpression="${delegateBonuspunkte}">
+      <bpmn:incoming>Flow_0w42ked</bpmn:incoming>
+      <bpmn:outgoing>Flow_1e5mfcd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="zahlungTask" name="Zahlung durchführen" camunda:delegateExpression="${delegateZahlung}">
+      <bpmn:incoming>Flow_1ckmg7s</bpmn:incoming>
+      <bpmn:outgoing>Flow_0813jxm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="versandTask" name="Versand durchführen" camunda:delegateExpression="${delegateVersand}">
+      <bpmn:incoming>Flow_1th0665</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ayor4r</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="bonuspunkteKompensationTask" name="Bonuspunkte abziehen" isForCompensation="true" camunda:delegateExpression="${delegateKompensationBonuspunkte}" />
+    <bpmn:serviceTask id="zahlungKompensationTask" name="Zahlung gutschrieben" isForCompensation="true" camunda:delegateExpression="${delegateKompensationZahlung}" />
+    <bpmn:serviceTask id="versandKompensationTask" name="Ware einbuchen" isForCompensation="true" camunda:delegateExpression="${delegateKompensationVersand}" />
+    <bpmn:endEvent id="endEvent" name="Bestellung abgeschlossen">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${endeBestellung}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0y1ezg4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="zahlungErhaltenEvent" name="Zahlung erhalten">
+      <bpmn:incoming>Flow_0813jxm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0w42ked</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1e2astu" messageRef="Message_07u3xtg" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="bonuspunkteGutgeschriebenEvent" name="Bonuspunkte gutgeschrieben">
+      <bpmn:incoming>Flow_1e5mfcd</bpmn:incoming>
+      <bpmn:outgoing>Flow_1th0665</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0fdpo12" messageRef="Message_0f8nre5" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="wareVerschicktEvent" name="Ware verschickt">
+      <bpmn:incoming>Flow_1ayor4r</bpmn:incoming>
+      <bpmn:outgoing>Flow_0y1ezg4</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1a2m8ya" messageRef="Message_180y2qi" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:startEvent id="startEvent" name="Bestellung eingegangen">
+      <bpmn:outgoing>Flow_1ckmg7s</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1qio62d" messageRef="Message_1ln72z2" />
+    </bpmn:startEvent>
+    <bpmn:subProcess id="Activity_0hroe5w" name="SAGA" triggeredByEvent="true">
+      <bpmn:intermediateThrowEvent id="sagaLieferung" name="Lieferung stornieren">
+        <bpmn:incoming>Flow_1jy2ryt</bpmn:incoming>
+        <bpmn:outgoing>Flow_0okpbjl</bpmn:outgoing>
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_0gnapxo" activityRef="versandTask" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:intermediateThrowEvent id="sagaBonuspunkte" name="Bonuspunkte abziehen">
+        <bpmn:incoming>Flow_0okpbjl</bpmn:incoming>
+        <bpmn:outgoing>Flow_0p0zw1e</bpmn:outgoing>
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_07fry5j" activityRef="bonuspunkteTask" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:intermediateThrowEvent id="sagaZahlung" name="Zahlung gutschreiben">
+        <bpmn:incoming>Flow_0p0zw1e</bpmn:incoming>
+        <bpmn:outgoing>Flow_1np6akf</bpmn:outgoing>
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_0o9j9y7" activityRef="zahlungTask" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:endEvent id="sagaEnde" name="SAGA beendet">
+        <bpmn:extensionElements>
+          <camunda:executionListener delegateExpression="${endeBestellungSaga}" event="start" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_1np6akf</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:startEvent id="sagaStart" name="Saga starten">
+        <bpmn:outgoing>Flow_1jy2ryt</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_19az62h" messageRef="Message_1v1tfl6" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_1jy2ryt" sourceRef="sagaStart" targetRef="sagaLieferung" />
+      <bpmn:sequenceFlow id="Flow_0okpbjl" sourceRef="sagaLieferung" targetRef="sagaBonuspunkte" />
+      <bpmn:sequenceFlow id="Flow_0p0zw1e" sourceRef="sagaBonuspunkte" targetRef="sagaZahlung" />
+      <bpmn:sequenceFlow id="Flow_1np6akf" sourceRef="sagaZahlung" targetRef="sagaEnde" />
+    </bpmn:subProcess>
+    <bpmn:boundaryEvent id="bonuspunkteKompensationEvent" attachedToRef="bonuspunkteTask">
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_18r8ndm" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="zahlungKompensationEvent" name="zahlungKompensationEvent" attachedToRef="zahlungTask">
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_0ddornp" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="versandKompensationEvent" attachedToRef="versandTask">
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_162icie" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_0w42ked" sourceRef="zahlungErhaltenEvent" targetRef="bonuspunkteTask" />
+    <bpmn:sequenceFlow id="Flow_1e5mfcd" sourceRef="bonuspunkteTask" targetRef="bonuspunkteGutgeschriebenEvent" />
+    <bpmn:sequenceFlow id="Flow_1ckmg7s" sourceRef="startEvent" targetRef="zahlungTask" />
+    <bpmn:sequenceFlow id="Flow_0813jxm" sourceRef="zahlungTask" targetRef="zahlungErhaltenEvent" />
+    <bpmn:sequenceFlow id="Flow_1th0665" sourceRef="bonuspunkteGutgeschriebenEvent" targetRef="versandTask" />
+    <bpmn:sequenceFlow id="Flow_1ayor4r" sourceRef="versandTask" targetRef="wareVerschicktEvent" />
+    <bpmn:sequenceFlow id="Flow_0y1ezg4" sourceRef="wareVerschicktEvent" targetRef="endEvent" />
+    <bpmn:association id="Association_03zk3jk" associationDirection="One" sourceRef="bonuspunkteKompensationEvent" targetRef="bonuspunkteKompensationTask" />
+    <bpmn:association id="Association_0wpemw3" associationDirection="One" sourceRef="zahlungKompensationEvent" targetRef="zahlungKompensationTask" />
+    <bpmn:association id="Association_0jwdx4o" associationDirection="One" sourceRef="versandKompensationEvent" targetRef="versandKompensationTask" />
+  </bpmn:process>
+  <bpmn:message id="Message_07u3xtg" name="zahlung-erhalten" />
+  <bpmn:message id="Message_0f8nre5" name="bonuspunkte-gutgeschrieben" />
+  <bpmn:message id="Message_180y2qi" name="lieferung-verschickt" />
+  <bpmn:message id="Message_1ln72z2" name="bestellung-eingegangen1" />
+  <bpmn:message id="Message_1v1tfl6" name="saga-starten" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="bestellprozess_1">
+      <bpmndi:BPMNEdge id="Flow_0w42ked_di" bpmnElement="Flow_0w42ked">
+        <di:waypoint x="418" y="120" />
+        <di:waypoint x="460" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1e5mfcd_di" bpmnElement="Flow_1e5mfcd">
+        <di:waypoint x="560" y="120" />
+        <di:waypoint x="612" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ckmg7s_di" bpmnElement="Flow_1ckmg7s">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="240" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0813jxm_di" bpmnElement="Flow_0813jxm">
+        <di:waypoint x="340" y="120" />
+        <di:waypoint x="382" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1th0665_di" bpmnElement="Flow_1th0665">
+        <di:waypoint x="648" y="120" />
+        <di:waypoint x="720" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ayor4r_di" bpmnElement="Flow_1ayor4r">
+        <di:waypoint x="820" y="120" />
+        <di:waypoint x="862" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y1ezg4_di" bpmnElement="Flow_0y1ezg4">
+        <di:waypoint x="898" y="120" />
+        <di:waypoint x="952" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1ra5h57_di" bpmnElement="bonuspunkteTask">
+        <dc:Bounds x="460" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_041ha6z_di" bpmnElement="zahlungTask">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hb1gkp_di" bpmnElement="versandTask">
+        <dc:Bounds x="720" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qqs47v_di" bpmnElement="bonuspunkteKompensationTask">
+        <dc:Bounds x="580" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0brszw5_di" bpmnElement="zahlungKompensationTask">
+        <dc:Bounds x="320" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gxygmh_di" bpmnElement="versandKompensationTask">
+        <dc:Bounds x="800" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0l6f7q0_di" bpmnElement="endEvent">
+        <dc:Bounds x="952" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="933" y="145" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0y2wi2w_di" bpmnElement="zahlungErhaltenEvent">
+        <dc:Bounds x="382" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="359" y="145" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fkvah4_di" bpmnElement="bonuspunkteGutgeschriebenEvent">
+        <dc:Bounds x="612" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="593" y="145" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0b0wy7h_di" bpmnElement="wareVerschicktEvent">
+        <dc:Bounds x="862" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="842" y="145" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zfsn0p_di" bpmnElement="startEvent">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="138" y="145" width="64" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hroe5w_di" bpmnElement="Activity_0hroe5w" isExpanded="true">
+        <dc:Bounds x="335" y="350" width="485" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1jy2ryt_di" bpmnElement="Flow_1jy2ryt">
+        <di:waypoint x="408" y="420" />
+        <di:waypoint x="462" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0okpbjl_di" bpmnElement="Flow_0okpbjl">
+        <di:waypoint x="498" y="420" />
+        <di:waypoint x="552" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p0zw1e_di" bpmnElement="Flow_0p0zw1e">
+        <di:waypoint x="588" y="420" />
+        <di:waypoint x="642" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1np6akf_di" bpmnElement="Flow_1np6akf">
+        <di:waypoint x="678" y="420" />
+        <di:waypoint x="732" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0mvs3jf_di" bpmnElement="sagaLieferung">
+        <dc:Bounds x="462" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="456" y="445" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rm5t23_di" bpmnElement="sagaBonuspunkte">
+        <dc:Bounds x="552" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="538" y="445" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1bvajtg_di" bpmnElement="sagaZahlung">
+        <dc:Bounds x="642" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="629" y="445" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dcg8vu_di" bpmnElement="sagaEnde">
+        <dc:Bounds x="732" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="713" y="445" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06g0vlx_di" bpmnElement="sagaStart">
+        <dc:Bounds x="372" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="359" y="445" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_03zk3jk_di" bpmnElement="Association_03zk3jk">
+        <di:waypoint x="510" y="178" />
+        <di:waypoint x="510" y="240" />
+        <di:waypoint x="580" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0wpemw3_di" bpmnElement="Association_0wpemw3">
+        <di:waypoint x="290" y="178" />
+        <di:waypoint x="290" y="240" />
+        <di:waypoint x="320" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0jwdx4o_di" bpmnElement="Association_0jwdx4o">
+        <di:waypoint x="770" y="178" />
+        <di:waypoint x="770" y="240" />
+        <di:waypoint x="800" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0qpwjwv_di" bpmnElement="bonuspunkteKompensationEvent">
+        <dc:Bounds x="492" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_09wzwdn_di" bpmnElement="zahlungKompensationEvent">
+        <dc:Bounds x="272" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="248" y="185" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1l6grrq_di" bpmnElement="versandKompensationEvent">
+        <dc:Bounds x="752" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
