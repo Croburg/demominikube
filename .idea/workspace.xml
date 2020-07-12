@@ -2,48 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dff68f79-6f63-407b-849d-a09c224594a1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonuspunkte-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bonuspunkte-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/BonuspunkteApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/BonuspunkteApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/conifg/KafkaConsumerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/conifg/KafkaConsumerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/conifg/KafkaProducerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/conifg/KafkaProducerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/controller/PunkteKontoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bonuspunkte-service/src/main/java/de/mlinac/bonuspunkte/controller/PunkteKontoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonuspunkte-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bonuspunkte-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkout-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/checkout-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkout-service/src/main/java/de/mlinac/checkoutservice/CheckoutServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkout-service/src/main/java/de/mlinac/checkoutservice/CheckoutServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkout-service/src/main/java/de/mlinac/checkoutservice/config/KafkaProducerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkout-service/src/main/java/de/mlinac/checkoutservice/config/KafkaProducerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkout-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/checkout-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/OrderserviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/OrderserviceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/configuration/KafkaConsumerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/configuration/KafkaConsumerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/configuration/KafkaProducerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/configuration/KafkaProducerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/delegate/UserTaskStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/delegate/UserTaskStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/service/BestellungService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/src/main/java/de/mlinac/orderservice/service/BestellungService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderservice/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usertask/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usertask/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/UsertaskApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/UsertaskApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/config/KafkaConsumerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/config/KafkaConsumerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/config/KafkaProducerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/config/KafkaProducerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/service/UsertaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/src/main/java/de/mlinac/usertask/service/UsertaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usertask/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versand-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/versand-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versand-service/src/main/java/de/mlinac/versandservice/VersandServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/versand-service/src/main/java/de/mlinac/versandservice/VersandServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versand-service/src/main/java/de/mlinac/versandservice/conifg/KafkaConsumerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/versand-service/src/main/java/de/mlinac/versandservice/conifg/KafkaConsumerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versand-service/src/main/java/de/mlinac/versandservice/conifg/KafkaProducerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/versand-service/src/main/java/de/mlinac/versandservice/conifg/KafkaProducerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versand-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/versand-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zahlung-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zahlung-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zahlung-service/src/main/java/de/mlinac/zahlungservice/ZahlungServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/zahlung-service/src/main/java/de/mlinac/zahlungservice/ZahlungServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zahlung-service/src/main/java/de/mlinac/zahlungservice/config/KafkaConsumerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/zahlung-service/src/main/java/de/mlinac/zahlungservice/config/KafkaConsumerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zahlung-service/src/main/java/de/mlinac/zahlungservice/config/KafkaProducerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/zahlung-service/src/main/java/de/mlinac/zahlungservice/config/KafkaProducerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zahlung-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/zahlung-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +107,7 @@
       <workItem from="1594561911393" duration="166000" />
       <workItem from="1594562091640" duration="469000" />
       <workItem from="1594562643768" duration="1185000" />
-      <workItem from="1594565860722" duration="19185000" />
+      <workItem from="1594565860722" duration="19693000" />
     </task>
     <servers />
   </component>
