@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dff68f79-6f63-407b-849d-a09c224594a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/depoy-all.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apache/000-default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/apache/000-default.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy-all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/deploy-all.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka/kafka-cluster.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kafka/kafka-cluster.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka/zookeeper-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kafka/zookeeper-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orderservice/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orderservice/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/orderservice/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remove-all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/remove-all.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usertask/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usertask/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usertask/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +40,9 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marko\Documents\UNI\kubernetes\k8s" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\marko\Documents\UNI\kubernetes\zahlung-service\src\main\resources" />
       <recent name="C:\Users\marko\Documents\UNI\kubernetes\usertask\src\main\resources" />
@@ -107,7 +120,7 @@
       <workItem from="1594561911393" duration="166000" />
       <workItem from="1594562091640" duration="469000" />
       <workItem from="1594562643768" duration="1185000" />
-      <workItem from="1594565860722" duration="20219000" />
+      <workItem from="1594565860722" duration="24757000" />
     </task>
     <servers />
   </component>
