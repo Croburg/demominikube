@@ -9,7 +9,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      run: bonuspunkte-service
+      run: bonuspunkte
   strategy: {}
   template:
     metadata:
@@ -32,15 +32,15 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    run: bonuspunkte-service
-  name: bonuspunkte-service
+    run: bonuspunkte
+  name: bonuspunkte
 spec:
   ports:
     - port: 8080
       protocol: TCP
       targetPort: 8080
   selector:
-    run: bonuspunkte-service
+    run: bonuspunkte
   type: LoadBalancer
 status:
   loadBalancer: {}

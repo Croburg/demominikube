@@ -3,25 +3,25 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    run: usertask
-  name: usertask
+    run: orderservice
+  name: orderservice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: usertask
+      run: orderservice
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        run: usertask
+        run: orderservice
     spec:
       containers:
-        - image: mmlinac/kube-usertask
-          name: usertask
+        - image: mmlinac/kube-orderservice
+          name: orderservice
           ports:
-            - containerPort: 8081
+            - containerPort: 8080
           resources: {}
 status: {}
 
@@ -32,15 +32,15 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    run: usertask
-  name: usertask
+    run: orderservice
+  name: orderservice
 spec:
   ports:
-    - port: 8081
+    - port: 8080
       protocol: TCP
-      targetPort: 8081
+      targetPort: 8080
   selector:
-    run: usertask
+    run: orderservice
   type: LoadBalancer
 status:
   loadBalancer: {}
